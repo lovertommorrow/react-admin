@@ -3,6 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import Header from './layout/header'
+import Content from './layout/content'
+import Footer from './layout/footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,6 +13,9 @@ function App() {
   return (
     <>
       <section id="center">
+        <Content />
+        <Footer />
+        <Header />
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
           <img src={reactLogo} className="framework" alt="React logo" />
