@@ -1,10 +1,22 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './i18n'
 import './styles/index.css'
 import App from './App.tsx'
+import LocaleProvider from './providers/LocaleProvider.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+async function setupApp() {
+  const rootElement = document.getElementById('root')
+  if (!rootElement) return
+
+  const root = createRoot(rootElement)
+  root.render(
+    <StrictMode>
+      <LocaleProvider>
+        <App />
+      </LocaleProvider>
+    </StrictMode>,
+  )
+}
+
+setupApp();

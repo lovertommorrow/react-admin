@@ -1,0 +1,44 @@
+{
+  "common": {
+    "header": "页头",
+    "footer": "页脚",
+    "content": "内容",
+    "logout": "退出登录"
+  },
+  "login": {
+    "title": "登录",
+    "username": "用户名",
+    "password": "密码",
+    "usernamePlaceholder": "请输入用户名",
+    "passwordPlaceholder": "请输入密码",
+    "usernameRequired": "请输入用户名",
+    "passwordRequired": "请输入密码",
+    "submit": "登录",
+    "success": "登录成功",
+    "failed": "用户名或密码不能为空"
+  },
+  "home": {
+    "title": "开始使用",
+    "editHint": "编辑 <1>src/App.tsx</1> 并保存以测试 <2>HMR</2>",
+    "count": "计数为 {{count}}",
+    "documentation": {
+      "title": "文档",
+      "subtitle": "解答你的疑问",
+      "exploreVite": "探索 Vite",
+      "learnMore": "了解更多"
+    },
+    "social": {
+      "title": "联系我们",
+      "subtitle": "加入 Vite 社区",
+      "github": "GitHub",
+      "discord": "Discord",
+      "x": "X.com",
+      "bluesky": "Bluesky"
+    }
+  },
+  "language": {
+    "label": "语言",
+    "zh-CN": "简体中文",
+    "en-US": "English"
+  }
+}
