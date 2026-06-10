@@ -1,74 +1,41 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Card, Form, Input, message } from 'antd'
-import { useState } from 'react'
+import { Col, Row } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
-import LanguageSwitcher from '../../components/LanguageSwitcher'
-import { useAuthStore } from '../../stores/auth'
+import LanguageSwitcher from '../../components/languageSwitcher'
 
-interface LoginForm {
-  username: string
-  password: string
-}
+import Banner from "../../assets/banner.svg"
+import logo from "../../assets/logo.svg"
 
 export default function LoginPage() {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const login = useAuthStore((state) => state.login)
-  const [loading, setLoading] = useState(false)
-
-  const onFinish = async (values: LoginForm) => {
-    setLoading(true)
-    try {
-      const success = await login(values.username, values.password)
-      if (success) {
-        message.success(t('login.success'))
-        navigate('/home', { replace: true })
-        return
-      }
-      message.error(t('login.failed'))
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-md shadow-sm">
-        <div className="flex justify-end mb-2">
+    <div className="h-full w-full">
+      <header className="z-10 absolute flex items-center right-3 top-3 left-3">
+        <div className="text-colorText flex flex-1 items-center">
+          <img alt="App Logo" src={logo} className="mr-2 w-11" />
+          <h1 className="m-0 text-xl font-medium">
+            {import.meta.env.VITE_GLOB_APP_TITLE}
+          </h1>
+        </div>
+        <div className="flex items-center">
           <LanguageSwitcher />
         </div>
-        <h1 className="text-2xl font-semibold text-center mb-6">
-          {t('login.title')}
-        </h1>
-        <Form<LoginForm> layout="vertical" onFinish={onFinish} autoComplete="off">
-          <Form.Item
-            name="username"
-            label={t('login.username')}
-            rules={[{ required: true, message: t('login.usernameRequired') }]}
-          >
-            <Input
-              prefix={<UserOutlined />}
-              placeholder={t('login.usernamePlaceholder')}
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label={t('login.password')}
-            rules={[{ required: true, message: t('login.passwordRequired') }]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder={t('login.passwordPlaceholder')}
-            />
-          </Form.Item>
-          <Form.Item className="mb-0">
-            <Button type="primary" htmlType="submit" block loading={loading}>
-              {t('login.submit')}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+      </header>
+      <div className="flex items-center overflow-hidden h-full">
+        <Row className="h-screen w-full">
+          <Col xs={0} sm={0} lg={15}>
+            <div className="flex flex-col items-center justify-center h-full gap-3">
+              <img alt="banner" src={Banner} className="h-64 motion-safe:animate-bounce-in-down-out-up" />
+              <div className="text-xl text-colorTextSecondary mt-6 font-sans lg:text-2xl">
+                {t("authority.pageTitle")}
+              </div>
+              <div className="text-colorTextTertiary mt-2">
+                {t("authority.pageDescription")}
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+    </div >
   )
 }

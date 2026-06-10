@@ -2,7 +2,7 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
-import LanguageSwitcher from '../../components/LanguageSwitcher'
+import LanguageSwitcher from '../../components/languageSwitcher'
 import { useAuthStore } from '../../stores/auth'
 
 export default function Header() {
