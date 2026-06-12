@@ -1,6 +1,5 @@
 {
-	"welcomeBack": "Welcome Back",
-	"loginDescription": "Login to your account",
+	"title": "Please input your username and password",
 	"pageTitle": "Admin System",
 	"pageDescription": "A simple, lightweight, and easy-to-use",
 	"layout": {

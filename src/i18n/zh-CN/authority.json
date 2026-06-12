@@ -1,7 +1,5 @@
 {
-	"welcomeBack": "欢迎回来",
-	"loginDescription": "请输入帐户信息开始管理项目",
-	"pageTitle": "中后台管理系统",
+	"title": "请输入用户名和密码",
 	"pageDescription": "简单、轻量、易于使用",
 	"layout": {
 		"alignLeft": "左对齐",
