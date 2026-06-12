@@ -1,10 +1,11 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { LoginInfo } from '../api/user/types'
 
 interface AuthState {
   token: string | null
   isAuthenticated: boolean
-  login: (username: string, password: string) => Promise<boolean>
+  login: (values: LoginInfo) => Promise<boolean>
   logout: () => void
 }
 
@@ -13,8 +14,8 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       isAuthenticated: false,
-      login: async (username, password) => {
-        if (!username.trim() || !password.trim()) {
+      login: async (values: LoginInfo) => {
+        if (!values.username.trim() || !values.password.trim()) {
           return false
         }
         set({ token: 'mock-token', isAuthenticated: true })

@@ -1,20 +1,21 @@
-import { createBrowserRouter, Navigate } from 'react-router'
-import AuthGuard from './guards/AuthGuard'
-import GuestGuard from './guards/GuestGuard'
+import { createBrowserRouter, Navigate } from "react-router";
+import AuthGuard from "./guards/AuthGuard";
+import GuestGuard from "./guards/GuestGuard";
+import Exception404 from "../pages/exception/404";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Navigate to="/login" replace />,
   },
   {
     element: <GuestGuard />,
     children: [
       {
-        path: '/login',
+        path: "/login",
         lazy: async () => {
-          const { default: Component } = await import('../pages/login')
-          return { Component }
+          const { default: Component } = await import("../pages/login");
+          return { Component };
         },
       },
     ],
@@ -23,18 +24,18 @@ const router = createBrowserRouter([
     element: <AuthGuard />,
     children: [
       {
-        path: '/home',
+        path: "/home",
         lazy: async () => {
-          const { default: Component } = await import('../pages/home')
-          return { Component }
+          const { default: Component } = await import("../pages/home");
+          return { Component };
         },
       },
     ],
   },
   {
-    path: '*',
-    element: <Navigate to="/login" replace />,
+    path: "*",
+    element: <Exception404 />,
   },
-])
+]);
 
-export default router
+export default router;

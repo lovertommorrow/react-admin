@@ -91,5 +91,6 @@
 	"expandAll": "Expand All",
 	"collapseAll": "Collapse All",
 	"checkAll": "Check All",
-	"cancelAll": "Cancel All"
+	"cancelAll": "Cancel All",
+	"header": "System Management"
 }

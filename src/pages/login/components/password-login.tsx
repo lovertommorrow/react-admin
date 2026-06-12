@@ -25,6 +25,16 @@ export default function PasswordLogin() {
 
   const handleFinish = async (values: LoginInfo) => {
     setLoading(true);
+    try {
+      await login(values);
+    } finally {
+      setLoading(false);
+    }
+    const redirect = searchParams.get("redirect");
+    const url = redirect
+      ? `/${redirect.slice(1)}`
+      : import.meta.env.VITE_BASE_HOME_PATH;
+    navigate(url);
   };
 
   return (
