@@ -1,12 +1,17 @@
-import { Navigate, Outlet } from 'react-router'
-import { useAuthStore } from '../../stores/auth'
+import { Navigate } from "react-router";
+import { useAuthStore } from "../../stores/auth";
 
-export default function AuthGuard() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
+interface AuthGuardProps {
+  children?: React.ReactNode;
+}
+
+// 认证守卫
+export default function AuthGuard({ children }: AuthGuardProps) {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />
+  return children;
 }

@@ -4,7 +4,6 @@ import reactLogo from "../../assets/react.svg";
 import viteLogo from "../../assets/vite.svg";
 import heroImg from "../../assets/hero.png";
 import "../../App.css";
-import LayoutHeader from "../../layout/layout-header";
 
 export default function HomePage() {
   const [count, setCount] = useState(0);
@@ -12,7 +11,6 @@ export default function HomePage() {
 
   return (
     <>
-      <LayoutHeader />
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />

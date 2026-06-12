@@ -1,13 +1,46 @@
-import { createBrowserRouter, Navigate } from "react-router";
-import AuthGuard from "./guards/AuthGuard";
+import { createHashRouter, Navigate } from "react-router";
 import GuestGuard from "./guards/GuestGuard";
 import Exception404 from "../pages/exception/404";
 
-const router = createBrowserRouter([
+// import Container from "../layout/container";
+// import { $t } from "../i18n/t";
+// import { createElement } from "react";
+// import { HomeOutlined } from "@ant-design/icons";
+
+const router = createHashRouter([
+  // {
+  //   Component: LayoutRoot,
+  //   children: [
+  //     {
+  //       path: "/home",
+  //       Component: Container,
+  //       handle: {
+  //         title: $t("common.menu.about"),
+  //         icon: createElement(HomeOutlined),
+  //       },
+  //       lazy: async () => {
+  //         const { default: Component } = await import("../pages/home");
+  //         return { Component };
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: "/",
     element: <Navigate to="/login" replace />,
   },
+  // {
+  //   path: "/home",
+  //   Component: Container,
+  //   handle: {
+  //     title: $t("common.menu.about"),
+  //     icon: createElement(HomeOutlined),
+  //   },
+  //   lazy: async () => {
+  //     const { default: Component } = await import("../pages/home");
+  //     return { Component };
+  //   },
+  // },
   {
     element: <GuestGuard />,
     children: [
@@ -15,18 +48,6 @@ const router = createBrowserRouter([
         path: "/login",
         lazy: async () => {
           const { default: Component } = await import("../pages/login");
-          return { Component };
-        },
-      },
-    ],
-  },
-  {
-    element: <AuthGuard />,
-    children: [
-      {
-        path: "/home",
-        lazy: async () => {
-          const { default: Component } = await import("../pages/home");
           return { Component };
         },
       },
