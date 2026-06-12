@@ -6,6 +6,7 @@ import {
 	TELEPHONE_REGEXP,
 	UNIFIED_SOCIAL_CREDIT_CODE_REGEXP,
 	USERNAME_REGEXP,
+	PASSWORD_REGEXP,
 } from "../constants/regular-expressions";
 
 export const FORM_REQUIRED = [{ required: true }]; // 表单必填校验
@@ -28,7 +29,6 @@ export function USERNAME_RULES(t: TFunction<"translation", undefined>) {
 
 /**
  * 密码规则验证函数
- *
  */
 export function PASSWORD_RULES(t: TFunction<"translation", undefined>) {
 	return [
@@ -37,7 +37,7 @@ export function PASSWORD_RULES(t: TFunction<"translation", undefined>) {
 			message: t("form.password.required"),
 		},
 		{
-			pattern: /^(?=.*\d)(?=.*[a-z])[\w~!@#$%^&*+.\-]{8,16}$/i,
+			pattern: PASSWORD_REGEXP,
 			message: t("form.password.invalid"),
 		},
 	];

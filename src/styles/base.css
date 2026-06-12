@@ -1,3 +1,9 @@
+html,
+body,
+#root {
+
+}
+
 /* 不使用 tailwind.css 的 preflight，使用 antd 的 reset 样式，防止和 antd 的样式冲突 */
 @layer reset, antd;
 

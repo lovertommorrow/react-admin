@@ -1,7 +1,14 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import enUS from './locales/en-US.json'
-import zhCN from './locales/zh-CN.json'
+import { getEnUsLang, getZhCnLang } from "./helper";
+export const i18nResources = {
+  "zh-CN": {
+    translation: getZhCnLang(),
+  },
+  "en-US": {
+    translation: getEnUsLang(),
+  },
+};
 
 export const LOCALE_STORAGE_KEY = 'locale'
 
@@ -19,10 +26,7 @@ function getDefaultLocale(): SupportedLocale {
 const defaultLocale = getDefaultLocale()
 
 i18n.use(initReactI18next).init({
-  resources: {
-    'zh-CN': { translation: zhCN },
-    'en-US': { translation: enUS },
-  },
+  resources: i18nResources,
   lng: defaultLocale,
   fallbackLng: 'en-US',
   interpolation: {
