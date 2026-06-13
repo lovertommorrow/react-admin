@@ -4,8 +4,8 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Link } from "react-router";
 import { FormModeContext } from "../form-mode-context";
-import { PASSWORD_RULES, USERNAME_RULES } from "../../../constants/rules";
-import { BasicButton } from "../../../components/basicButton";
+import { PASSWORD_RULES, USERNAME_RULES } from "@/constants/rules";
+import { BasicButton } from "@/components/basicButton";
 
 const { Title } = Typography;
 

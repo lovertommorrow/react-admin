@@ -1,10 +1,10 @@
-import { GlobalOutlined } from '@ant-design/icons'
-import { Select } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { SUPPORTED_LOCALES, type SupportedLocale } from '../../i18n'
+import { GlobalOutlined } from "@ant-design/icons";
+import { Select } from "antd";
+import { useTranslation } from "react-i18next";
+import { SUPPORTED_LOCALES, type SupportedLocale } from "@/i18n";
 
 export default function LanguageSwitcher() {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
 
   return (
     <Select
@@ -16,7 +16,7 @@ export default function LanguageSwitcher() {
       }))}
       prefix={<GlobalOutlined />}
       style={{ width: 120 }}
-      aria-label={t('language.label')}
+      aria-label={t("language.label")}
     />
-  )
+  );
 }

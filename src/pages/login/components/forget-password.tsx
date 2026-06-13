@@ -4,7 +4,7 @@ import { Button, Form, Input, Space, Typography } from "antd";
 import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormModeContext } from "../form-mode-context";
-import { BasicButton } from "../../../components/basicButton";
+import { BasicButton } from "@/components/basicButton";
 
 const { Title } = Typography;
 

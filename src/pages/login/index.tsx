@@ -1,8 +1,8 @@
 import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "../../components/languageSwitcher";
-import Banner from "../../assets/banner.svg";
-import logo from "../../assets/logo.svg";
+import LanguageSwitcher from "@/components/languageSwitcher";
+import Banner from "@/assets/banner.svg";
+import logo from "@/assets/logo.svg";
 import { useMemo, useState } from "react";
 import {
   FormModeContext,

@@ -4,8 +4,8 @@ import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FormModeContext } from "../form-mode-context";
-import { MOBILE_PHONE_RULES } from "../../../constants/rules";
-import { BasicButton } from "../../../components/basicButton";
+import { MOBILE_PHONE_RULES } from "@/constants/rules";
+import { BasicButton } from "@/components/basicButton";
 
 const { Title } = Typography;
 

@@ -6,7 +6,7 @@ import { Button, Form, Input, Space } from "antd";
 import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
-import { BasicButton } from "../../../components/basicButton";
+import { BasicButton } from "@/components/basicButton";
 import { FormModeContext } from "../form-mode-context";
 
 const FORM_INITIAL_VALUES: LoginInfo = {
