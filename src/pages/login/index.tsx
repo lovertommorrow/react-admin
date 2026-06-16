@@ -17,7 +17,6 @@ export default function LoginPage() {
     () => ({ formMode, setFormMode }),
     [formMode, setFormMode],
   );
-
   return (
     <div className="h-full w-full">
       <header className="z-10 absolute flex items-center right-3 top-3 left-3">

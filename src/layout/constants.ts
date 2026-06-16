@@ -36,8 +36,7 @@ export const DEFAULT_NAMESPACE = "react-admin";
 export const ELEMENT_ID_MAIN_CONTENT = `__${DEFAULT_NAMESPACE}_main_content`;
 
 /**
- * @zh layout content 组件的高度
- * @en Height of the layout content component
+ * layout content 组件的高度
  */
 export const CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT = `--${DEFAULT_NAMESPACE}-content-height`;
 /**

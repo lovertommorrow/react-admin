@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { LoginInfo } from '../api/user/types'
+import { getAppNamespace } from '@/utils/getAppNameSpace'
 
 interface AuthState {
   token: string | null
@@ -9,11 +10,14 @@ interface AuthState {
   logout: () => void
 }
 
+const initialState = {
+  token: null,
+  isAuthenticated: false
+}
+
 export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      token: null,
-      isAuthenticated: false,
+  persist((set) => ({
+      ...initialState,
       login: async (values: LoginInfo) => {
         if (!values.username.trim() || !values.password.trim()) {
           return false
@@ -24,7 +28,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => set({ token: null, isAuthenticated: false }),
     }),
     {
-      name: 'auth-storage',
+      name: getAppNamespace('auth-storage'),
       partialize: (state) => ({
         token: state.token,
         isAuthenticated: state.isAuthenticated,

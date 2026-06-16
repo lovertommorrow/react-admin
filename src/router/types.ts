@@ -77,3 +77,5 @@ export interface RouteMeta {
 	 */
 	backstage?: boolean
 }
+
+export type RouteFileModule = Record<string, { default: AppRouteRecordRaw[] }>;

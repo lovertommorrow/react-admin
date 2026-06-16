@@ -9,6 +9,7 @@ export const i18nResources = {
     translation: getEnUsLang(),
   },
 };
+export type LanguageType = "zh-CN" | "en-US";
 
 export const LOCALE_STORAGE_KEY = 'locale'
 
