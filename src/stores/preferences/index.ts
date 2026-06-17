@@ -8,7 +8,9 @@ import type { PreferencesState, ThemeType } from "./types";
  */
 export const DEFAULT_PREFERENCES = {
 	theme: "auto",
+	themeRadius: 6,
 	sidebarTheme: "light",
+	themeColorPrimary: "#1677ff",
 	sidebarWidth: 210,
 	sideCollapsedWidth: 56,
 	sidebarCollapsed: false,

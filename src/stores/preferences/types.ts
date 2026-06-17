@@ -9,11 +9,20 @@ export type ThemeType = "dark" | "light" | "auto";
 
 export interface PreferencesState extends SidebarState {
 	/**
-
 	 * Current theme
 	 * @default "auto"
 	 */
 	theme: ThemeType,
+	/**
+	 * Theme radius value
+	 * @default 6
+	 */
+	themeRadius: number
+	/**
+	 * Theme color
+	 * @default "#1677ff" - blue
+	 */
+	themeColorPrimary: string
 }
 
 export interface SidebarState {
