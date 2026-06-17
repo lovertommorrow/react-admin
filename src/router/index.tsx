@@ -1,10 +1,7 @@
 import { createHashRouter, type RouteObject } from "react-router";
-
 import LayoutRoot from "@/layout/layout-root";
 import { baseRoutes } from "./routes";
-import GuestGuard from "./guards/GuestGuard";
 import { ROOT_ROUTE_ID } from "./routes/constants";
-const layoutRoutes = baseRoutes.filter((r) => r.path !== "/login");
 
 // import Container from "../layout/container";
 // import { $t } from "../i18n/t";
@@ -68,19 +65,7 @@ export const rootRoute: RouteObject[] = [
     path: "/",
     id: ROOT_ROUTE_ID,
     Component: LayoutRoot,
-    children: layoutRoutes,
-  },
-  {
-    element: <GuestGuard />,
-    children: [
-      {
-        path: "/login",
-        lazy: async () => {
-          const { default: Component } = await import("@/pages/login");
-          return { Component };
-        },
-      },
-    ],
+    children: baseRoutes,
   },
 ];
 
@@ -89,6 +74,5 @@ function createRouter() {
 }
 
 export const router = createRouter();
-console.log("createRouter", router);
 
 export default router;

@@ -2,9 +2,9 @@ import { Navigate, Outlet } from "react-router";
 import { useAuthStore } from "../../stores/auth";
 
 export default function GuestGuard() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isLogin = useAuthStore((state) => state.token);
 
-  if (isAuthenticated) {
+  if (isLogin) {
     return <Navigate to="/home" replace />;
   }
 

@@ -12,10 +12,10 @@ export function UserMenu() {
   const avatar = useUserStore(state => state.avatar);
   const logout = useAuthStore(state => state.logout);
   // 处理点击事件
-  const onClick: MenuProps["onClick"] = async ({ key }) => {
+  const onClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "logout") {
-      await logout();
-      navigate("/login");
+      logout();
+      //navigate("/login", { replace: true });
     }
     if (key === "personal-center") {
       navigate("/personal-center/my-profile");
@@ -42,7 +42,7 @@ export function UserMenu() {
       placement="bottomRight"
       trigger={["click"]}
     >
-      <Avatar src={avatar} className="shadow hover:shadow-lg hover:shadow-slate-200" />
+      <Avatar src={avatar || null} className="shadow hover:shadow-lg hover:shadow-slate-200" />
     </Dropdown>
   );
 }

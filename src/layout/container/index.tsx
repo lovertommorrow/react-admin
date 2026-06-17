@@ -7,10 +7,11 @@ import { cn } from "@/utils/cn";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useMemo } from "react";
 import { useLayout } from "../hooks/use-layout";
+import { useMenu } from "../layout-menu/useMenu";
 //import { useMenu } from "../layout-menu/useMenu";
 
 export default function Container() {
-  //const { sideNavItems } = useMenu();
+  const { sideNavItems } = useMenu();
   const { sidebarCollapsed } = usePreferencesStore();
   const { sidebarWidth, sideCollapsedWidth } = useLayout();
 
@@ -29,7 +30,7 @@ export default function Container() {
       >
         <LayoutHeader />
         <LayoutSidebar computedSidebarWidth={computedSidebarWidth}>
-          <LayoutMenu />
+          <LayoutMenu menus={sideNavItems} />
         </LayoutSidebar>
 
         <LayoutContent />

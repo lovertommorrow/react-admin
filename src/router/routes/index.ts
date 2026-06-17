@@ -1,6 +1,7 @@
 import type { AppRouteRecordRaw, RouteFileModule } from "../types";
 import { ascending } from "../utils/ascending";
 import { mergeRouteModules } from "../utils/merge-route-modules";
+import { LOGIN_ROUTE } from "./constants";
 
 
 // 路由文件
@@ -12,8 +13,11 @@ const baseRoutes = ascending([
   ...dynamicRoutes,
 ]);
 
+const whiteRouteNames = [LOGIN_ROUTE];
+
 export {
 	baseRoutes,
+  whiteRouteNames,
 };
 
 console.log("baseRoutes", baseRoutes);
