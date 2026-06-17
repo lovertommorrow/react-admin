@@ -21,7 +21,7 @@ export function SliderTrigger({ className }: SliderTriggerProps) {
         width: "100%",
       }}
       icon={sidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      onClick={() => setPreferences("sidebarCollapsed", !sidebarCollapsed)}
+      onClick={() => setPreferences({ sidebarCollapsed: !sidebarCollapsed })}
       className={cn(
         "rounded-none",
         className,

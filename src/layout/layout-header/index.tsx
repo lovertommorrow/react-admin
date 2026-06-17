@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../../components/languageSwitcher";
 import { headerHeight } from "../constants";
 import { UserMenu } from "./components/userMenu";
+import { FullScreenButton } from "./components/fullScreenButton";
+import { ThemeButton } from "./components/themeButton";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -20,6 +22,8 @@ export default function Header() {
       <span className="font-medium">{t("common.header")}</span>
       <div className="ml-auto flex shrink-0 items-center gap-3">
         <LanguageSwitcher {...buttonProps} />
+        <ThemeButton {...buttonProps} />
+        <FullScreenButton target={document.documentElement} />
         <UserMenu {...buttonProps} />
       </div>
     </header>
