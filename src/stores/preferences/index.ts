@@ -20,7 +20,7 @@ export const DEFAULT_PREFERENCES = {
 
 /**
  * 偏好设置操作接口
- */
+*/
 interface PreferencesAction {
 	reset: () => void
 	changeSiteTheme: (theme: ThemeType) => void

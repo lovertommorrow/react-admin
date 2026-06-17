@@ -3,7 +3,6 @@ import { ascending } from "../utils/ascending";
 import { mergeRouteModules } from "../utils/merge-route-modules";
 import { LOGIN_ROUTE } from "./constants";
 
-
 // 路由文件
 export const dynamicRouteFiles: RouteFileModule = import.meta.glob("./modules/**/*.ts", { eager: true });
 
@@ -19,5 +18,3 @@ export {
 	baseRoutes,
   whiteRouteNames,
 };
-
-console.log("baseRoutes", baseRoutes);

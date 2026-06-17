@@ -5,7 +5,7 @@ import { home } from "@/router/extra-info/order";
 import Container from "@/layout/container";
 import type { AppRouteRecordRaw } from "@/router/types";
 
-const Home = lazy(() => import("@/pages/home"));
+const Permission = lazy(() => import("@/pages/permission"));
 const routes: AppRouteRecordRaw[] = [
 	{
 		path: "/permission",
@@ -18,7 +18,7 @@ const routes: AppRouteRecordRaw[] = [
 		children: [
 			{
 				index: true,
-				Component: Home,
+				Component: Permission,
 				handle: {
 					title: $t("common.menu.access"),
 					icon: createElement(LockOutlined),

@@ -18,6 +18,8 @@ export function useLayoutContentStyle() {
 	const contentHeightControls = useCssVar(CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT);
 	const contentWidthControls = useCssVar(CSS_VARIABLE_LAYOUT_CONTENT_WIDTH);
 
+	console.log(visibleDomRect, 'visibleDomRect');
+
 	const overlayStyle = useMemo<CSSProperties>(() => {
 		const { height, left, top, width } = visibleDomRect || {};
 		return {

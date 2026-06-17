@@ -36,7 +36,7 @@ export function useCssVar(
 		if (options?.initialValue) {
 			controls.set(options.initialValue);
 		}
-	}, [options?.initialValue]);
+	}, [controls, options.initialValue]);
 
 	useEffect(() => {
 		return () => controls.remove();

@@ -35,7 +35,7 @@ export const useAccessStore = create<AccessState & AccessAction>((set) => ({
   ...initialState,
 
   setAccessStore: (routes) => {
-    const newRoutes = ascending([...baseRoutes, ...routes]);
+    const newRoutes = ascending([...routes]);
     /* 添加新的路由到根路由 */
     router.patchRoutes(ROOT_ROUTE_ID, routes);
     const flatRouteList = flattenRoutes(newRoutes);

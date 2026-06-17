@@ -3,7 +3,6 @@ import type { AppRouteRecordRaw } from "@/router/types";
 import { lazy } from "react";
 
 const Login = lazy(() => import("@/pages/login"));
-console.log("Login", Login);
 
 const routes: AppRouteRecordRaw[] = [
 	{
