@@ -13,21 +13,10 @@ function injectViewTransitionStyles() {
       const style = document.createElement("style");
       style.id = styleId;
       style.textContent = `
-        html.stop-transition * {
-          transition: none !important;
-        }
         ::view-transition-old(root),
         ::view-transition-new(root) {
           animation: none;
           mix-blend-mode: normal;
-        }
-        ::view-transition-old(root),
-        .dark::view-transition-new(root) {
-          z-index: 999999999 !important;
-        }
-        ::view-transition-new(root),
-        .dark::view-transition-old(root) {
-          z-index: 1;
         }
       `;
       document.head.appendChild(style);
@@ -36,39 +25,54 @@ function injectViewTransitionStyles() {
 }
 
 export function ThemeButton({ ...restProps }: ButtonProps) {
-
   useEffect(() => {
     injectViewTransitionStyles();
   }, []);
 
   const { isDark, changeSiteTheme } = usePreferences();
   const toggleTheme = (event: React.PointerEvent) => {
-    // console.log("toggleTheme", event);
-    // changeSiteTheme(isDark ? "light" : "dark");
     const isAppearanceTransition = !!document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!isAppearanceTransition || !event) {
       changeSiteTheme(isDark ? "light" : "dark");
       return;
     }
-    const x = event?.clientX || 0;
-    const y = event?.clientY || 0;
+    const x = event.clientX;
+    const y = event.clientY;
     const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
-    ) + 200;
-    //document.documentElement.style.setProperty('--vt-x', `${x}px`);
-    //document.documentElement.style.setProperty('--vt-y', `${y}px`);
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y)
+    );
+    const root = document.documentElement;
+
+    // ---- 动态控制 z-index（使用独立 style 标签） ----
+    const styleId = "theme-transition-zindex";
+    let styleEl = document.getElementById(styleId) as HTMLStyleElement;
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = styleId;
+      document.head.appendChild(styleEl);
+    }
+
+    // 根据方向设置伪元素层级
+    // 暗 → 亮：旧视图（暗）收缩，需要在上层
+    styleEl.textContent = `
+        ::view-transition-old(root) { z-index: ${isDark ? 999999999 : 1}; }
+        ::view-transition-new(root) { z-index: ${isDark ? 1 : 999999999}; }
+      `;
+    // ---- 启动视图过渡 ----
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         changeSiteTheme(isDark ? "light" : "dark");
       });
     });
+
+    // ---- 执行裁剪动画，并等待动画完成后再移除样式 ----
     transition.ready.then(() => {
       const clipPath = [
         `circle(0px at ${x}px ${y}px)`,
         `circle(${endRadius}px at ${x}px ${y}px)`,
       ];
-      document.documentElement.animate(
+      const animation = root.animate(
         {
           clipPath: isDark ? [...clipPath].reverse() : clipPath,
         },
@@ -77,10 +81,14 @@ export function ThemeButton({ ...restProps }: ButtonProps) {
           easing: "ease-in",
           fill: "forwards",
           pseudoElement: isDark
-            ? "::view-transition-old(root)"
-            : "::view-transition-new(root)",
-        },
+            ? "::view-transition-old(root)"   // 暗→亮：旧视图收缩
+            : "::view-transition-new(root)",  // 亮→暗：新视图展开
+        }
       );
+      return animation.finished; // 关键：等待动画完成
+    }).then(() => {
+      // 动画完成后移除动态样式
+      if (styleEl) styleEl.remove();
     });
   };
 
@@ -94,5 +102,5 @@ export function ThemeButton({ ...restProps }: ButtonProps) {
         toggleTheme(e);
       }}
     />
-  )
+  );
 }

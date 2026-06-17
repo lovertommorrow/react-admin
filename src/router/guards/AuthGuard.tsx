@@ -31,7 +31,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
       // 等待所有 Promise 完成
       const results = await Promise.allSettled(promises);
       const uniqueRoutes = removeDuplicateRoutes(baseRoutes);
-      console.log(uniqueRoutes, '==uniqueRoutes==')
       setAccessStore(uniqueRoutes);
       const hasError = results.some(result => result.status === "rejected");
       if (hasError) {
