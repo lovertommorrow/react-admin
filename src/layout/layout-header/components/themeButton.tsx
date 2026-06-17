@@ -43,6 +43,8 @@ export function ThemeButton({ ...restProps }: ButtonProps) {
 
   const { isDark, changeSiteTheme } = usePreferences();
   const toggleTheme = (event: React.PointerEvent) => {
+    // console.log("toggleTheme", event);
+    // changeSiteTheme(isDark ? "light" : "dark");
     const isAppearanceTransition = !!document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!isAppearanceTransition || !event) {
       changeSiteTheme(isDark ? "light" : "dark");

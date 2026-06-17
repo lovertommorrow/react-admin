@@ -30,7 +30,6 @@ export default function LayoutMenu({
     return {};
   }, [mode, sidebarCollapsed]);
   const { sidebarTheme, isDark } = usePreferences();
-  console.log("isDark", isDark, sidebarTheme);
 
   return (
     <Menu
