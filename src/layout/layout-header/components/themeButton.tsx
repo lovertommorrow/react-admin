@@ -13,10 +13,21 @@ function injectViewTransitionStyles() {
       const style = document.createElement("style");
       style.id = styleId;
       style.textContent = `
+         html.stop-transition * {
+          transition: none !important;
+        }
         ::view-transition-old(root),
         ::view-transition-new(root) {
           animation: none;
           mix-blend-mode: normal;
+        }
+        ::view-transition-old(root),
+        .dark::view-transition-new(root) {
+          z-index: 999999999;
+        }
+        ::view-transition-new(root),
+        .dark::view-transition-old(root) {
+          z-index: 1;
         }
       `;
       document.head.appendChild(style);
@@ -43,23 +54,6 @@ export function ThemeButton({ ...restProps }: ButtonProps) {
       Math.max(y, innerHeight - y)
     );
     const root = document.documentElement;
-
-    // ---- 动态控制 z-index（使用独立 style 标签） ----
-    const styleId = "theme-transition-zindex";
-    let styleEl = document.getElementById(styleId) as HTMLStyleElement;
-    if (!styleEl) {
-      styleEl = document.createElement("style");
-      styleEl.id = styleId;
-      document.head.appendChild(styleEl);
-    }
-
-    // 根据方向设置伪元素层级
-    // 暗 → 亮：旧视图（暗）收缩，需要在上层
-    styleEl.textContent = `
-        ::view-transition-old(root) { z-index: ${isDark ? 999999999 : 1}; }
-        ::view-transition-new(root) { z-index: ${isDark ? 1 : 999999999}; }
-      `;
-    // ---- 启动视图过渡 ----
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         changeSiteTheme(isDark ? "light" : "dark");
@@ -86,9 +80,6 @@ export function ThemeButton({ ...restProps }: ButtonProps) {
         }
       );
       return animation.finished; // 关键：等待动画完成
-    }).then(() => {
-      // 动画完成后移除动态样式
-      if (styleEl) styleEl.remove();
     });
   };
 

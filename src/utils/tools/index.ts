@@ -55,3 +55,18 @@ export function isMacOs() {
 	const macRegex = /macintosh|mac os x/i;
 	return macRegex.test(navigator.userAgent);
 }
+
+export function toggleHtmlClass(className: string) {
+	function add() {
+		document.documentElement.classList.add(className);
+	}
+
+	function remove() {
+		document.documentElement.classList.remove(className);
+	}
+
+	return {
+		add,
+		remove,
+	};
+}
