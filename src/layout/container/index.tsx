@@ -8,6 +8,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useMemo } from "react";
 import { useLayout } from "../hooks/use-layout";
 import { useMenu } from "../layout-menu/useMenu";
+import { BreadcrumbViews } from "../widgets/breadcrumb-views";
 
 export default function Container() {
   const { sideNavItems, handleClick } = useMenu();
@@ -21,17 +22,20 @@ export default function Container() {
       : sidebarWidth;
     return currentSidebarWidth;
   }, [sidebarCollapsed, sideCollapsedWidth, sidebarWidth]);
+
   return (
     <Watermark>
       <section
         className={cn("transition-all flex flex-col h-screen")}
         style={{ paddingLeft: computedSidebarWidth }}
       >
-        <LayoutHeader />
+        <LayoutHeader>
+          <BreadcrumbViews />
+        </LayoutHeader>
+
         <LayoutSidebar computedSidebarWidth={computedSidebarWidth}>
           <LayoutMenu menus={sideNavItems} handleMenuClick={handleClick} />
         </LayoutSidebar>
-
         <LayoutContent />
       </section>
     </Watermark>

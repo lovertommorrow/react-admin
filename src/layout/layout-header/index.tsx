@@ -6,8 +6,9 @@ import { UserMenu } from "./components/userMenu";
 import { FullScreenButton } from "./components/fullScreenButton";
 import { ThemeButton } from "./components/themeButton";
 import { usePreferences } from "@/hooks/use-preferences";
+import type { ReactNode } from "react";
 
-export default function Header() {
+export default function Header({ children }: { children: ReactNode }) {
   const { token: { Menu }, } = theme.useToken();
   const { t } = useTranslation();
   const { isDark, sidebarTheme } = usePreferences();
@@ -34,7 +35,11 @@ export default function Header() {
         }}
 
       >
-        <span className="font-medium">{t("common.header")}</span>
+        {children ?
+          <div className="flex items-center grow h-full overflow-hidden">
+            {children}
+          </div> : <span className="font-medium">{t("common.header")}</span>
+        }
         <div className="ml-auto flex shrink-0 items-center gap-3">
           <LanguageSwitcher {...buttonProps} />
           <ThemeButton {...buttonProps} />

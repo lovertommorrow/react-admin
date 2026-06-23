@@ -3,3 +3,21 @@
 
 /* @see https://ant.design/docs/react/compatible-style-cn#resetcss */
 @import url(antd/dist/reset.css) layer(reset);
+
+
+html.stop-transition * {
+	transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+::view-transition-old(root),
+.dark::view-transition-new(root) {
+	z-index: 999999999;
+}
+::view-transition-new(root),
+.dark::view-transition-old(root) {
+	z-index: 1;
+}

@@ -1,46 +1,24 @@
 import { BasicButton } from "@/components/basicButton";
 import { usePreferences } from "@/hooks/use-preferences";
+import { toggleHtmlClass } from "@/utils/tools";
 import { SunOutlined, MoonOutlined } from "@ant-design/icons";
 import type { ButtonProps } from "antd";
 import { useEffect } from "react";
 import { flushSync } from "react-dom";
 
-const isBrowser = typeof window !== "undefined";
-function injectViewTransitionStyles() {
-  if (isBrowser) {
-    const styleId = "theme-switch-styles";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.textContent = `
-         html.stop-transition * {
-          transition: none !important;
-        }
-        ::view-transition-old(root),
-        ::view-transition-new(root) {
-          animation: none;
-          mix-blend-mode: normal;
-        }
-        ::view-transition-old(root),
-        .dark::view-transition-new(root) {
-          z-index: 999999999;
-        }
-        ::view-transition-new(root),
-        .dark::view-transition-old(root) {
-          z-index: 1;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }
-}
-
 export function ThemeButton({ ...restProps }: ButtonProps) {
-  useEffect(() => {
-    injectViewTransitionStyles();
-  }, []);
 
   const { isDark, changeSiteTheme } = usePreferences();
+  /* tailwind theme */
+  useEffect(() => {
+    if (isDark) {
+      toggleHtmlClass("dark").add();
+    }
+    else {
+      toggleHtmlClass("dark").remove();
+    }
+  }, [isDark]);
+
   const toggleTheme = (event: React.PointerEvent) => {
     const isAppearanceTransition = !!document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!isAppearanceTransition || !event) {
