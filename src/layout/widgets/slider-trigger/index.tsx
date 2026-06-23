@@ -1,5 +1,4 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-
 import { sliderTriggerHeight } from "../../constants";
 import { cn } from "@/utils/cn";
 import { BasicButton } from "@/components/basicButton";
