@@ -10,7 +10,7 @@ interface MatchItem {
   handle: RouteMeta;
 }
 
-const itemRender: BreadcrumbProps["itemRender"] = (route, params, routes) => {
+const itemRender: BreadcrumbProps["itemRender"] = (route, _params, routes) => {
   const last = routes.indexOf(route) === routes.length - 1;
   return last || !route.path
     ? (
