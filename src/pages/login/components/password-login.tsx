@@ -11,7 +11,7 @@ import { FormModeContext } from "../form-mode-context";
 
 const FORM_INITIAL_VALUES: LoginInfo = {
   username: "admin",
-  password: "123456789admin",
+  password: "lh_DEV_2026!@",
 };
 
 export default function PasswordLogin() {
