@@ -12,7 +12,7 @@ export default defineConfig({
 		host: true,
 		proxy: {
 			"/dev-api": {
-				target: "http://220.154.142.17:9090",
+				target: "http://localhost:9090",
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/dev-api/, ''),
 			},
