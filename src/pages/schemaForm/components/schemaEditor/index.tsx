@@ -67,7 +67,7 @@ export default function SchemaEditor({ value, onChange }: SchemaEditorProps) {
           flex: 1,
           fontSize: 14,
           lineHeight: 1.6,
-          minHeight: 400,
+          minHeight: 450,
         }}
         spellCheck={false}
       />

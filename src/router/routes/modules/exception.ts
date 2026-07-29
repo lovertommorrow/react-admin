@@ -3,6 +3,7 @@ import { createElement, lazy } from "react";
 import { $t } from "@/i18n/t";
 import Container from "@/layout/container";
 import type { AppRouteRecordRaw } from "@/router/types";
+import { exception } from "@/router/extra-info/order";
 
 const Error404 = lazy(() => import("@/pages/exception/404"));
 const Error403 = lazy(() => import("@/pages/exception/403"));
@@ -12,6 +13,7 @@ const routes: AppRouteRecordRaw[] = [
 		path: "/exception",
 		Component: Container,
 		handle: {
+			order: exception,
 			title: $t("common.menu.exception"),
 			icon: createElement(ExceptionOutlined),
 		},

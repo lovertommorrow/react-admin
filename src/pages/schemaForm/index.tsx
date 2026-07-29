@@ -187,7 +187,7 @@ export default function SchemaFormPage() {
 
   return (
     <BasicContent>
-      <Row gutter={[16, 16]}>
+      <Row gutter={12}>
         <Col xs={24} lg={8}>
           <Card title={t('schemaForm.schemaEditor.title')} styles={{ body: { height: 660, padding: 0 } }}>
             <Tabs
@@ -209,7 +209,7 @@ export default function SchemaFormPage() {
             />
           </Card>
         </Col>
-        <Col xs={24} lg={8}>
+        <Col xs={24} lg={10}>
           <Card title={t('schemaForm.schemaEditor.previewTitle')} styles={{ body: { maxHeight: 660, overflow: 'auto' } }}>
             <FormEngine
               schema={schemas[activeTab]}
@@ -221,7 +221,7 @@ export default function SchemaFormPage() {
             />
           </Card>
         </Col>
-        <Col xs={24} lg={8}>
+        <Col xs={24} lg={6}>
           <Card title={t('schemaForm.schemaEditor.formDataTitle')} styles={{ body: { height: 660, overflow: 'auto' } }}>
             <pre
               style={{
