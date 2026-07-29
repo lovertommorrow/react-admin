@@ -65,8 +65,7 @@ export default function SchemaEditor({ value, onChange }: SchemaEditorProps) {
         onChange={(e) => handleChange(e.target.value)}
         style={{
           flex: 1,
-          fontFamily: 'ui-monospace, SFMono-Regular, monospace',
-          fontSize: 13,
+          fontSize: 14,
           lineHeight: 1.6,
           minHeight: 400,
         }}
