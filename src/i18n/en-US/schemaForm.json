@@ -1,0 +1,27 @@
+{
+  "user": "User",
+  "product": "Product",
+  "survey": "Survey",
+  "contact": "Contact",
+  "schemaEditor": {
+    "title": "Schema Definition",
+    "previewTitle": "Form Preview",
+    "formDataTitle": "Form Data",
+    "format": "Format",
+    "copy": "Copy",
+    "subTitle": "Real-time editing, right-side immediate rendering"
+  },
+  "placeholder": "Please select",
+  "customComponent": "Custom Component",
+  "noSupportType": "Not supported type",
+  "numberPlaceholder": "Please enter a number",
+  "parseError": "Parse error",
+  "project": "Project",
+  "moveUp": "Move Up",
+  "moveDown": "Move Down",
+  "delete": "Delete",
+  "add": "Add",
+  "yes": "Yes",
+  "no": "No",
+  "submit": "Submit"
+}

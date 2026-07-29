@@ -1,0 +1,27 @@
+{
+  "user": "用户注册",
+  "product": "商品配置",
+  "survey": "调查问卷",
+  "contact": "联系人",
+  "schemaEditor": {
+    "title": "Schema 定义",
+    "previewTitle": "表单预览",
+    "formDataTitle": "表单数据",
+    "format": "格式化",
+    "copy": "复制",
+    "subTitle": " 实时编辑，右侧即时渲染"
+  },
+  "placeholder": "请选择",
+  "customComponent": "自定义组件",
+  "noSupportType": "不支持的类型",
+  "numberPlaceholder": "请输入数字",
+  "parseError": "解析错误",
+  "project": "项目",
+  "moveUp": "上移",
+  "moveDown": "下移",
+  "delete": "删除",
+  "add": "添加",
+  "yes": "是",
+  "no": "否",
+  "submit": "提交"
+}
