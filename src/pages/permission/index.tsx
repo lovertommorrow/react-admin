@@ -1,7 +1,9 @@
+import { BasicContent } from "@/components/basicContent";
+
 export default function PermissionPage() {
   return (
-    <div>
+    <BasicContent>
       <p>permission page</p>
-    </div>
+    </BasicContent>
   );
 }

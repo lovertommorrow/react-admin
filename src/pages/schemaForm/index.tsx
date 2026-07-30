@@ -157,6 +157,7 @@ const nestedSchema = {
 }
 
 export default function SchemaFormPage() {
+  const [messageApi, contextHolder] = message.useMessage();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('user')
   const [schemas, setSchemas] = useState<Record<string, any>>({
@@ -173,9 +174,7 @@ export default function SchemaFormPage() {
 
   const handleSubmit = (data: Record<string, any>) => {
     console.log('提交数据:', data)
-    message.success('表单验证通过，数据已输出到控制台')
-    // 清空当前 tab 的数据  
-    setFormData((prev) => ({ ...prev, [activeTab]: {} }));
+    messageApi.success('表单验证通过，数据已输出到控制台')
   }
 
   const items = [
@@ -211,6 +210,7 @@ export default function SchemaFormPage() {
         </Col>
         <Col xs={24} lg={10}>
           <Card title={t('schemaForm.schemaEditor.previewTitle')} styles={{ body: { maxHeight: 660, overflow: 'auto' } }}>
+            {contextHolder}
             <FormEngine
               schema={schemas[activeTab]}
               value={formData[activeTab]}

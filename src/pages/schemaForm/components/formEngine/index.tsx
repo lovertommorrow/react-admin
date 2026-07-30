@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { Form, Button, Card, Alert } from 'antd'
 import type { FormEngineProps, JSONSchema } from './types'
 import { validateField, isEmptyValue } from './validators'
@@ -7,7 +7,7 @@ import { getValue, setValue, shouldHide } from './utils'
 import FieldRender from '../fieldRender'
 import { useTranslation } from 'react-i18next'
 
-export default function FormEngine(props: FormEngineProps) {
+function FormEngineContent(props: FormEngineProps) {
   const { t } = useTranslation();
   const {
     schema,
@@ -31,56 +31,56 @@ export default function FormEngine(props: FormEngineProps) {
     [onChange]
   )
 
-  const validateAll = useCallback(
-    (data: any, schema: JSONSchema, path = ''): Record<string, string[]> => {
-      const errors: Record<string, string[]> = {}
+  const validateAll = useCallback(function validateAll(
+    data: any,
+    schema: JSONSchema,
+    path = ''
+  ): Record<string, string[]> {
+    const errors: Record<string, string[]> = {}
 
-      if (schema.type === 'object' && schema.properties) {
-        const required = schema.required || []
-        for (const [key, fieldSchema] of Object.entries(schema.properties)) {
-          if (shouldHide(fieldSchema, data)) continue
-          const fieldPath = path ? `${path}.${key}` : key
-          const fieldValue = getValue(data, key)
+    if (schema.type === 'object' && schema.properties) {
+      const required = schema.required || []
+      for (const [key, fieldSchema] of Object.entries(schema.properties)) {
+        if (shouldHide(fieldSchema, data)) continue
+        const fieldPath = path ? `${path}.${key}` : key
+        const fieldValue = getValue(data, key)
 
-          if (required.includes(key) && isEmptyValue(fieldValue)) {
-            errors[fieldPath] = ['此项为必填项']
-          }
+        if (required.includes(key) && isEmptyValue(fieldValue)) {
+          errors[fieldPath] = ['此项为必填项']
+        }
 
-          const fieldErrors = validateField(fieldValue, fieldSchema)
-          if (fieldErrors.length > 0) {
-            errors[fieldPath] = [...(errors[fieldPath] || []), ...fieldErrors]
-          }
+        const fieldErrors = validateField(fieldValue, fieldSchema)
+        if (fieldErrors.length > 0) {
+          errors[fieldPath] = [...(errors[fieldPath] || []), ...fieldErrors]
+        }
 
-          if (fieldSchema.type === 'object' && fieldValue) {
-            // eslint-disable-next-line react-hooks/immutability
-            Object.assign(errors, validateAll(fieldValue, fieldSchema, fieldPath))
-          }
-          if (
-            fieldSchema.type === 'array' &&
-            Array.isArray(fieldValue) &&
-            fieldSchema.items
-          ) {
-            fieldValue.forEach((item, idx) => {
-              if (fieldSchema.items!.type === 'object') {
-                Object.assign(
-                  errors,
-                  validateAll(item, fieldSchema.items!, `${fieldPath}[${idx}]`)
-                )
-              } else {
-                const itemErrors = validateField(item, fieldSchema.items!)
-                if (itemErrors.length > 0) {
-                  errors[`${fieldPath}[${idx}]`] = itemErrors
-                }
+        if (fieldSchema.type === 'object' && fieldValue) {
+          Object.assign(errors, validateAll(fieldValue, fieldSchema, fieldPath))
+        }
+        if (
+          fieldSchema.type === 'array' &&
+          Array.isArray(fieldValue) &&
+          fieldSchema.items
+        ) {
+          fieldValue.forEach((item, idx) => {
+            if (fieldSchema.items!.type === 'object') {
+              Object.assign(
+                errors,
+                validateAll(item, fieldSchema.items!, `${fieldPath}[${idx}]`)
+              )
+            } else {
+              const itemErrors = validateField(item, fieldSchema.items!)
+              if (itemErrors.length > 0) {
+                errors[`${fieldPath}[${idx}]`] = itemErrors
               }
-            })
-          }
+            }
+          })
         }
       }
+    }
+    return errors
+  }, [])
 
-      return errors
-    },
-    []
-  )
   // 修复：非提交状态下只显示已触摸字段的错误
   const errors = useMemo(() => {
     // 初始状态：没有任何交互，不显示任何错误
@@ -101,13 +101,6 @@ export default function FormEngine(props: FormEngineProps) {
     return filteredErrors
   }, [formData, schema, submitAttempted, touched, validateAll])
 
-  // 当 schema 变化时重置校验状态
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTouched(new Set())
-    setSubmitAttempted(false)
-  }, [schema])
-
   const handleFieldChange = useCallback(
     (path: string, val: any) => {
       const newData = setValue(formData, path, val)
@@ -124,7 +117,7 @@ export default function FormEngine(props: FormEngineProps) {
       onSubmit?.(formData)
     }
     // 重置表单状态
-    setTouched(new Set())
+    setTouched(new Set());
     setSubmitAttempted(false)
   }, [formData, schema, onSubmit, validateAll])
 
@@ -133,8 +126,8 @@ export default function FormEngine(props: FormEngineProps) {
       return <Alert message="Schema 根类型必须是 object" type="error" showIcon />
     }
 
-    const properties = schema.properties
-    const required = schema.required || []
+    const properties = schema.properties;
+    const required = schema.required || [];
 
     return Object.entries(properties).map(([key, fieldSchema]) => {
       if (shouldHide(fieldSchema, formData)) return null
@@ -184,4 +177,10 @@ export default function FormEngine(props: FormEngineProps) {
       </Form>
     </Card>
   )
+}
+
+export default function FormEngine(props: FormEngineProps) {
+  const { schema } = props
+  const schemaKey = useMemo(() => JSON.stringify(schema), [schema])
+  return <FormEngineContent key={schemaKey} {...props} />
 }

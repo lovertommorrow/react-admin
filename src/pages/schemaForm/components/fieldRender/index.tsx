@@ -38,6 +38,7 @@ export default function FieldRender(props: FieldProps) {
       if (schema.enumNames && schema.enumNames.length === schema.enum.length) {
         return (
           <Radio.Group
+            name={schema.title}
             {...commonProps}
             value={value}
             onChange={(e) => onChange(e.target.value)}
@@ -48,6 +49,7 @@ export default function FieldRender(props: FieldProps) {
       return (
         <Select
           {...commonProps}
+
           value={value}
           onChange={onChange}
           placeholder={t('schemaForm.placeholder')}
@@ -59,6 +61,7 @@ export default function FieldRender(props: FieldProps) {
     if (schema.format === 'textarea') {
       return (
         <TextArea
+          name={schema.title}
           {...commonProps}
           rows={3}
           value={value || ''}
@@ -67,12 +70,13 @@ export default function FieldRender(props: FieldProps) {
       )
     }
     if (schema.format === 'date') {
-      return <DatePicker {...commonProps} value={value} onChange={onChange} />
+      return <DatePicker name={schema.title} {...commonProps} value={value} onChange={onChange} />
     }
     // default input field
     return (
       <Input
         {...commonProps}
+        name={schema.title}
         type={schema.format === 'password' ? 'password' : schema.format === 'email' ? 'email' : 'text'}
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
@@ -83,6 +87,7 @@ export default function FieldRender(props: FieldProps) {
   if (schema.type === 'number' || schema.type === 'integer') {
     return (
       <InputNumber
+        name={schema.title}
         {...commonProps}
         value={value}
         onChange={onChange}
